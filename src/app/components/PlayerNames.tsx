@@ -51,7 +51,7 @@ export default function PlayerNames(props: any) {
 
   let items = [...Array(_numberOfPlayers)].map((_, index) =>
         <li className="gap-3 col-span-1 text-center p-4 bg-slate-800" style={{color: colors[index]}} key={index}>Player {index + 1} Name:
-             <input className="dark:text-white text-black rounded-full p-2 bg-slate-600 border-slate-400 border-2" type="text" value={playerNames[index] ? playerNames[index].name : ""} name={`player-${index}`} onChange={(e) => handlePlayerChange(index, 'name', e.target.value)} />
+             <input className="dark:text-white text-black rounded-full p-2 bg-slate-600 border-slate-400 border-2" type="text" value={playerNames[index] ? playerNames[index].name : ""} name={`player_${index+1}`} onChange={(e) => handlePlayerChange(index, 'name', e.target.value)}  required/>
         </li> 
   );
 

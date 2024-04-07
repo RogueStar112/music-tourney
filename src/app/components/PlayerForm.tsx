@@ -3,12 +3,19 @@
 
 import { useState, useEffect } from "react";
 
+import { useRouter } from "next/navigation";
+
 import PlayerNames from "./PlayerNames";
+
+import { fourPlayerGame, eightPlayerGame } from "./game/modes/eightPlayerGame";
 
 export default function PlayerForm() {
 
   let [numberOfPlayers, setNumberOfPlayers] = useState(0);
 
+  let [playersDeclared, setPlayersDeclared] = useState(false);
+
+  const router = useRouter()
 
    const handleChange = (e) => {
     setNumberOfPlayers(e.target.value);
@@ -18,27 +25,50 @@ export default function PlayerForm() {
     console.log('NOP', numberOfPlayers)
   }, [numberOfPlayers])
  
-  //  async function onSubmit(e: any) {
-  //   e.preventDefault();
+   async function onSubmit(e: any) {
+    e.preventDefault();
 
-  //     const formData = new FormData(e.target)
+      const formData = new FormData(e.target);
 
-  //     // console.log(formData);
-  //     const response = await fetch('/api/submit', {
-  //       method: 'POST',
-  //       body: formData,
-  //     })
+      let playerNamesURI = ''      
 
-  //     const data = await response.json() 
+      for (const pair of formData.entries()) {
 
-  //     console.log(data);
-  // }
+        if(pair[0] !== 'no_of_players') {
+    
+            playerNamesURI += (`?${pair[0]}=${pair[1].replaceAll(" ", "%20")}`);
+
+        }
+
+
+      }
+
+      // let formData_names = formData.entries();
+
+      // console.log('FDN', formData_names)
+
+      const rules = numberOfPlayers === 4 ? fourPlayerGame : eightPlayerGame;
+
+      const redirectUrl = `/game?rules=${encodeURIComponent(JSON.stringify(rules))}?players=${numberOfPlayers}${playerNamesURI}`; 
+
+
+      
+      router.push(redirectUrl); 
+      // const response = await fetch('/api/post_names', {
+      //   method: 'POST',
+      //   body: formData,
+      // })
+
+      // const data = await response.json() 
+
+      // console.log(data);
+  }
 
     
 
   return (
 
-  <form className="text-white mx-auto flex flex-col max-w-3xl">
+  <form onSubmit={onSubmit} className="text-white mx-auto flex flex-col max-w-3xl">
         
         <h1 className="text-center">Music Tourney - Player Setup</h1>
 
@@ -46,7 +76,7 @@ export default function PlayerForm() {
           Number of players<br /><br />
 
         
-          <input type="radio" id="2_players" name="no_of_players" value={2} onChange={handleChange}>
+          <input type="radio" id="2_players" name="no_of_players" value={2} onChange={handleChange} disabled>
 
          </input>
 
@@ -80,7 +110,9 @@ export default function PlayerForm() {
 
         <PlayerNames no_of_players={numberOfPlayers} />
 
-        <button className="bg-green-500 p-4 text-white justify-end w-full" type="submit">Submit</button>
+        
+
+        <button type="submit" className="bg-green-500 p-4 text-white justify-end w-full">Submit</button>
   </form>
 
   )
