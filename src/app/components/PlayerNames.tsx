@@ -17,28 +17,41 @@ export default function PlayerNames(props: any) {
   // }
 
  
-  // const handlePlayerChange = (index: any, attribute: any, value: any) => {
-  //   setPlayerNames({
-  //     ...playerNames,
-  //     [index]: {
-  //       ...(playerNames[index] || {}), // Keep existing data
-  //       [attribute]: value        
-  //     }
-  //   });
-  // };
+  const handlePlayerChange = (index: any, attribute: any, value: any) => {
+    setPlayerNames({
+      ...playerNames,
+      [index]: {
+        ...(playerNames[index] || {}), // Keep existing data
+        [attribute]: value        
+      }
+    });
+  };
+
+  
+  const generateInputs = () => {
+    const newInputs = {};
+    for (let i = 0; i < _numberOfPlayers; i++) {
+      newInputs[i] = { id: i+1, name: '' }; // Initialize player data
+    }
+    setPlayerNames(newInputs);
+  };
+
 
   
 
   useEffect(() => {
-
     // console.log('NOP PN', _numberOfPlayers)
     // console.log([...Array(_numberOfPlayers)])
-    
+  
+        generateInputs();
+
+        console.log(playerNames);
+
   }, [_numberOfPlayers])
 
   let items = [...Array(_numberOfPlayers)].map((_, index) =>
         <li className="gap-3 col-span-1 text-center p-4 bg-slate-800" style={{color: colors[index]}} key={index}>Player {index + 1} Name:
-             <input className="dark:text-white text-black rounded-full p-2 bg-slate-600 border-slate-400 border-2" type="text" name={`player-${index}`} />
+             <input className="dark:text-white text-black rounded-full p-2 bg-slate-600 border-slate-400 border-2" type="text" value={playerNames[index] ? playerNames[index].name : ""} name={`player-${index}`} onChange={(e) => handlePlayerChange(index, 'name', e.target.value)} />
         </li> 
   );
 

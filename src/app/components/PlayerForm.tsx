@@ -40,6 +40,7 @@ export default function PlayerForm() {
 
   <form className="text-white mx-auto flex flex-col max-w-3xl">
         
+        <h1 className="text-center">Music Tourney - Player Setup</h1>
 
         <div className="flex gap-4 justify-center">
           Number of players<br /><br />
@@ -79,7 +80,7 @@ export default function PlayerForm() {
 
         <PlayerNames no_of_players={numberOfPlayers} />
 
-        <button className="bg-green-500 p-4 text-white justify-end max-w-[512px] mx-auto" type="submit">Submit</button>
+        <button className="bg-green-500 p-4 text-white justify-end w-full" type="submit">Submit</button>
   </form>
 
   )
