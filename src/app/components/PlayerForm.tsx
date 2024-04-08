@@ -9,7 +9,7 @@ import PlayerNames from "./PlayerNames";
 
 import { fourPlayerGame, eightPlayerGame } from "./game/modes/eightPlayerGame";
 
-export default function PlayerForm() {
+export default function PlayerForm({completed, setCompleted, formData, setFormData}) {
 
   let [numberOfPlayers, setNumberOfPlayers] = useState(0);
 
@@ -28,32 +28,38 @@ export default function PlayerForm() {
    async function onSubmit(e: any) {
     e.preventDefault();
 
-      const formData = new FormData(e.target);
+      setCompleted(true);
 
-      let playerNamesURI = ''      
+      const newFormData = new FormData(e.target);
 
-      for (const pair of formData.entries()) {
+      console.log("NFD", newFormData)
 
-        if(pair[0] !== 'no_of_players') {
+      setFormData(newFormData)
+     
+      // // let playerNamesURI = ''      
+
+      // // for (const pair of formData.entries()) {
+
+      // //   if(pair[0] !== 'no_of_players') {
     
-            playerNamesURI += (`?${pair[0]}=${pair[1].replaceAll(" ", "%20")}`);
+      // //       playerNamesURI += (`?${pair[0]}=${pair[1].replaceAll(" ", "%20")}`);
 
-        }
+      // //   }
 
 
-      }
+      // // }
 
-      // let formData_names = formData.entries();
+      // // let formData_names = formData.entries();
 
-      // console.log('FDN', formData_names)
+      // // console.log('FDN', formData_names)
 
-      const rules = numberOfPlayers === 4 ? fourPlayerGame : eightPlayerGame;
+      // // const rules = numberOfPlayers === 4 ? fourPlayerGame : eightPlayerGame;
 
-      const redirectUrl = `/game?rules=${encodeURIComponent(JSON.stringify(rules))}?players=${numberOfPlayers}${playerNamesURI}`; 
+      // // const redirectUrl = `/game?rules=${encodeURIComponent(JSON.stringify(rules))}?players=${numberOfPlayers}${playerNamesURI}`; 
 
 
       
-      router.push(redirectUrl); 
+      // // router.push(redirectUrl); 
       // const response = await fetch('/api/post_names', {
       //   method: 'POST',
       //   body: formData,
@@ -61,7 +67,6 @@ export default function PlayerForm() {
 
       // const data = await response.json() 
 
-      // console.log(data);
   }
 
     

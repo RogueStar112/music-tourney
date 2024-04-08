@@ -5,32 +5,34 @@ import { FormEvent } from "react";
 import { useState, useEffect } from "react";
 
 import PlayerForm from "../components/PlayerForm";
+import Game from "../game/page";
+
 
 export default function Page() {
 
+  let [formCompleted, setFormCompleted] = useState(false); 
+
+  let [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    console.log('Form completed')
+    console.log('New form data', formData)
+  }, [formCompleted])
+  
+  if (formCompleted) {
+    return (
 
 
-    async function onSubmit(e: any) {
-    e.preventDefault();
+        
+        
+        <Game />
 
-      const formData = new FormData(e.target)
+    );
 
-      // console.log(formData);
-      const response = await fetch('/api/submit', {
-        method: 'POST',
-        body: formData,
-      })
+    } else {
 
-      const data = await response.json() 
-
-      console.log(data);
-  } 
-
-  return (
-
-
-
-      <PlayerForm />
-
-  );
+      return (
+        <PlayerForm completed={formCompleted} setCompleted={setFormCompleted} formData={formData} setFormData={setFormData} />
+      )
+  }
 }
