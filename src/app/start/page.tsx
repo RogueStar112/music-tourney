@@ -17,7 +17,7 @@ export default function Page() {
   useEffect(() => {
     console.log('Form completed')
     console.log('New form data', formData)
-  }, [formCompleted])
+  }, [formCompleted, formData])
   
   if (formCompleted) {
     return (
@@ -25,7 +25,7 @@ export default function Page() {
 
         
         
-        <Game />
+        <Game data={formData}/>
 
     );
 
