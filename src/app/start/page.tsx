@@ -15,8 +15,8 @@ export default function Page() {
   let [formData, setFormData] = useState({});
 
   useEffect(() => {
-    console.log('Form completed')
-    console.log('New form data', formData)
+    // console.log('Form completed')
+    // console.log('New form data', formData)
   }, [formCompleted, formData])
   
   if (formCompleted) {

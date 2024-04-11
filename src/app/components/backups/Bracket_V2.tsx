@@ -1,6 +1,6 @@
 export default function Bracket() {
 
-    // Bracket V3
+
 
     return (
         <div className="flex justify-around text-sm">

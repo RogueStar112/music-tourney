@@ -19,7 +19,6 @@ export default function Game({data}) {
 
     /* convert to object so the game can read the form! */
 
-
     function convertFormToObject(form) {
       const object = {};
       for (const [key, value] of form) {
@@ -34,8 +33,10 @@ export default function Game({data}) {
 
     let gameRules = {
       "no_of_tracks": {"4": 4, "8": 2},
-      
+      "total_songs": 16  
     }
+
+
 
     let initAmountOfTracks = gameRules["no_of_tracks"][dataJSON["no_of_players"]];
 
@@ -49,6 +50,10 @@ export default function Game({data}) {
     }
 
     console.log("TRACKS REMAINING", tracksRemaining);
+
+    let [_tracksRemaining, setTracksRemaining] = useState(tracksRemaining);
+
+    // setTracksRemaining(tracksRemaining["player_1"] -= 1)
 
     // let tracksRemaining = {
     //   "player_1": initAmountOfTracks,
@@ -67,16 +72,58 @@ export default function Game({data}) {
 
     let queue = generateQueue(no_of_players)
 
-    console.log(dataJSON)
-    console.log("QUEUE", queue)    
+    // console.log(dataJSON)
+    // console.log("QUEUE", queue)    
 
+    
+
+    let songStack = []
+
+    for (let i=0; i<gameRules["total_songs"]; i++) {
+      songStack.push(`Song ${i+1}`);
+    }
+
+    function renderSongBrackets() {
+
+        const arrayHalf = Math.ceil(songStack.length / 2);
+
+        let firstHalf = songStack.slice(0, arrayHalf);
+        let secondHalf = songStack.slice(arrayHalf);
+
+        return (
+          
+          <div className="flex justify-around text-sm">
+            <div id="left-bracket">  
+                {firstHalf.map((item) => (
+
+                    <div className="" key={item}>{item}</div>
+                ))}
+            </div>
+
+
+            <div id="right-bracket">  
+                {secondHalf.map((item) => (
+
+                    <div className="" key={item}>{item}</div>
+                ))}
+            </div>
+          </div>
+        )
+
+    }
+
+    function takeTurn() {
+
+      
+
+    }
 
 
     return (
       <>
         <p className="text-white">{JSON.stringify(dataJSON)}</p>
         <p className="text-white">{queue}</p>
-        <Bracket />
+        {renderSongBrackets()}
       </>
 
   )

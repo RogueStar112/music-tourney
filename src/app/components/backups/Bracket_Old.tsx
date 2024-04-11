@@ -1,32 +1,32 @@
 export default function Bracket() {
 
-    // Bracket V3
+
 
     return (
         <div className="flex justify-around text-sm">
             
-            <div id="left-bracket" className="text-white [&>*]:flex justify-evenly [&>*]:flex-col [&>*]:my-6 [&>div>div]:p-3 [&>div]:border-t-4 [&>div]:border-r-4 [&>div]:border-b-4 [&>div>div]:border-2 [&>div>div]:m-2 [&>div>div]:max-w-[275px]">
-                <div>
-                    <div className="">Journey - Dont Stop Believin</div>
-                    <div className="">Michael Jackson - Billie Jean</div>
+            <div id="left-bracket" className="text-white [&>*]:flex justify-evenly [&>*]:flex-col [&>*]:my-6 [&>div>div]:p-3">
+                <div className="">
+                    <div className="border-b-4 border-b-white">Journey - Dont Stop Believin</div>
+                    <div className="border-r-4 border-r-white">Michael Jackson - Billie Jean</div>
                 </div>
                 <div>
-                    <div  className="">Maroon 5 - Sugar</div>
-                    <div className="">Gryffin - All You Need To Know</div>
+                    <div  className="border-b-4 border-b-white border-r-4 border-r-white">Maroon 5 - Sugar</div>
+                    <div className="border-r-4 border-r-white">Gryffin - All You Need To Know</div>
                 </div>
                 <div>
-                    <div  className="">Kygo - Whatever</div>
-                    <div className="">Taylor Swift - Blank Space</div>
+                    <div  className="border-b-4 border-b-white border-r-4 border-r-white">Kygo - Whatever</div>
+                    <div className="border-r-4 border-r-white">Taylor Swift - Blank Space</div>
                 </div>
                 <div>
-                    <div  className="">Laura Branigan - Self Control</div>
+                    <div  className="border-r-4 border-r-white border-b-4 border-b-white">Laura Branigan - Self Control</div>
                     <div className="">Phil Collins - Another Day In Paradise</div>
                 </div>
             </div>
 
             
 
-            <div id="right-bracket" className="text-white [&>*]:flex justify-evenly [&>*]:flex-col [&>*]:my-6 [&>div>div]:p-3 [&>div]:border-t-4 [&>div]:border-l-4 [&>div]:border-b-4 [&>div>div]:border-2 [&>div>div]:m-2 text-right [&>div>div]:max-w-[275px]">
+            <div id="right-bracket" className="text-white [&>*]:flex justify-evenly [&>*]:flex-col [&>*]:my-6 [&>div>div]:p-3 text-right">
                 <div>
                     <div className="border-b-4 border-b-white">The Chainsmokers - Closer</div>
                     <div  className="border-l-4 border-l-white">Bastille - Pompeii</div>
