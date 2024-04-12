@@ -80,8 +80,15 @@ export default function Game({data}) {
     let songStack = []
 
     for (let i=0; i<gameRules["total_songs"]; i++) {
-      songStack.push(`Song ${i+1}`);
+      songStack.push(`${i+1}`);
+    } 
+
+    function groupByPairs(arr) {
+      return arr.length % 2 === 0
+        ? arr.map((_, i) => arr.slice(i, i + 2))
+        : arr.map((_, i) => arr.slice(i, i + 2)).concat([[arr[arr.length - 1]]]);
     }
+
 
     function renderSongBrackets() {
 
@@ -90,21 +97,81 @@ export default function Game({data}) {
         let firstHalf = songStack.slice(0, arrayHalf);
         let secondHalf = songStack.slice(arrayHalf);
 
+        console.log("FH", firstHalf)
+        console.log("SH", secondHalf)
+
+        const firstHalfRows = [];
+        const secondHalfRows = [];
+
+        for  (let i = 0; i < firstHalf.length-1; i+=2) {
+
+          firstHalfRows.push([firstHalf[i], firstHalf[i+1]])
+
+          const element1 = firstHalf[i];
+          const element2 = firstHalf[i + 1]; 
+
+          console.log("EL1", element1, "EL2", element2); 
+        }
+
+        for  (let i = 0; i < secondHalf.length-1; i+=2) {
+
+          secondHalfRows.push([secondHalf[i], secondHalf[i+1]])
+
+        }
+
+        console.log("FHR", firstHalfRows);
+        console.log("SHR", secondHalfRows);
+
+
         return (
           
-          <div className="flex justify-around text-sm">
+          <div className="flex justify-around text-sm [&>*>*>input]:text-white">
             <div id="left-bracket">  
-                {firstHalf.map((item) => (
+              
+  
+                {firstHalfRows.map((item, index) => (
 
-                    <div className="" key={item}>{item}</div>
+                  
+                  <div className="border-t-2 border-r-2 border-b-2 my-3">
+
+
+                  
+                    <div className="flex justify-between m-2" key={item[0]}>
+                                      {item[0]}
+                      <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[0]}`}></input>
+                    </div>
+
+                    <div className="flex justify-between m-2" key={item[1]}>
+                                      {item[1]}
+                      <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[1]}`}></input>
+                    </div>
+
+
+                  </div>
+                  
                 ))}
             </div>
 
 
             <div id="right-bracket">  
-                {secondHalf.map((item) => (
+                {secondHalfRows.map((item, index) => (
+                
+                  <div className="border-t-2 border-b-2 border-l-2 m-3">
 
-                    <div className="" key={item}>{item}</div>
+
+                  
+                    <div className="flex justify-between m-2 flex-row-reverse" key={item[0]}>
+                                      {item[0]}
+                      <input className="bg-slate-600 border-2 border-slate-200 mr-2"  id={`song-${item[0]}`}></input>
+                    </div>
+
+                    <div className="flex justify-between m-2 flex-row-reverse" key={item[1]}>
+                                      {item[1]}
+                      <input className="bg-slate-600 border-2 border-slate-200 mr-2"  id={`song-${item[1]}`}></input>
+                    </div>
+
+
+                  </div>
                 ))}
             </div>
           </div>
