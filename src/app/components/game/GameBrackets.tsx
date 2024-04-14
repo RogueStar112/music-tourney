@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Bracket from "./Bracket";
 
-export default function GameBrackets({songStack, chosenInput, setChosenInput, setQueueNumber}) {
+export default function GameBrackets({songStack, setSongStack, chosenInput, setChosenInput, setQueueNumber}) {
 
         const arrayHalf = Math.ceil(songStack.length / 2);
 
@@ -77,9 +77,9 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput, se
 
                     
                     
-                    <Bracket item={item[0]} isDisabled={false} halfIndex={firstHalfState[item[0]-1]} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
+                    <Bracket item={item[0]} songStack={songStack} setSongStack={setSongStack} isDisabled={false} halfIndex={firstHalfState[item[0]-1]} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
 
-                    <Bracket item={item[1]} isDisabled={false} halfIndex={firstHalfState[item[1]-1]} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
+                    <Bracket item={item[1]} songStack={songStack} setSongStack={setSongStack} isDisabled={false} halfIndex={firstHalfState[item[1]-1]} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
 
 
                   </div>
@@ -197,9 +197,9 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput, se
                 
                   <div className="border-t-2 border-b-2 border-l-2 my-3"  key={`${item[0]}${item[1]}-${index}`}>
                   
-                      <Bracket item={item[0]} isFlipped={true} isDisabled={true} halfIndex={secondHalfState[index]}  chosenInput={chosenInput} setChosenInput={setChosenInput}/>
+                      <Bracket item={item[0]} songStack={songStack} setSongStack={setSongStack} isFlipped={true} isDisabled={true} halfIndex={secondHalfState[index]}  chosenInput={chosenInput} setChosenInput={setChosenInput}/>
 
-                      <Bracket item={item[1]} isFlipped={true} isDisabled={true} halfIndex={secondHalfState[index]}  chosenInput={chosenInput} setChosenInput={setChosenInput}/>
+                      <Bracket item={item[1]} songStack={songStack} setSongStack={setSongStack} isFlipped={true} isDisabled={true} halfIndex={secondHalfState[index]}  chosenInput={chosenInput} setChosenInput={setChosenInput}/>
 
                   </div>
                 ))}

@@ -110,12 +110,14 @@ export default function Game({data}) {
 
     let [chosenInput, setChosenInput] = useState(0);
 
+    let [_songStack, setSongStack] = useState([...songStack]);
 
-    useEffect(() => {
-       if(chosenInput == 9) {
-            // setChosenInput(9);
-       }
-     }, [chosenInput]); 
+
+    // useEffect(() => {
+    //    if(chosenInput == 9) {
+    //         // setChosenInput(9);
+    //    }
+    //  }, [chosenInput]); 
 
 
     //   useEffect(() => {
@@ -128,6 +130,12 @@ export default function Game({data}) {
 
     // }, [chosenInput]);
 
+     useEffect(() => {
+       
+      console.log("NEW _SONG STACK", _songStack)
+
+     }, [_songStack]); 
+
     return (
       <div className="h-screen m-auto">
         {/* <p className="text-white">{JSON.stringify(dataJSON)}</p>
@@ -135,7 +143,7 @@ export default function Game({data}) {
 
         
     
-        <GameBrackets songStack={songStack} chosenInput={chosenInput} setChosenInput={setChosenInput} setQueueNumber={setQueueNumber}/>
+        <GameBrackets songStack={_songStack} setSongStack={setSongStack} chosenInput={chosenInput} setChosenInput={setChosenInput} setQueueNumber={setQueueNumber}/>
 
         <PlayerTurn number={queueNumber} chosenInput={chosenInput} songNumber={songStack[chosenInput]} no_of_players={no_of_players} setQueueNumber={setQueueNumber} name={dataJSON[`player_${queueNumber}`]} />
         
