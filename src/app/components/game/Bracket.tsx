@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Bracket({item, songStack, setSongStack, isFlipped, isDisabled, halfIndex, chosenInput, setChosenInput}) {
+export default function Bracket({item, songStack, name, setSongStack, isFlipped, isDisabled, halfIndex, chosenInput, setChosenInput}) {
 
     // Bracket V3
 
