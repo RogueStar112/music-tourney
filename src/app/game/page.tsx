@@ -82,7 +82,7 @@ export default function Game({data}) {
     let [queueNumber, setQueueNumber] = useState(0)
 
     
-
+    console.log("THE QUEUE", queue)
     // console.log(dataJSON)
     
 
@@ -99,6 +99,8 @@ export default function Game({data}) {
       songStack.push(`${i+1}`);
     } 
 
+    console.log('SONG STACK', songStack);
+
     // function groupByPairs(arr) {
     //   return arr.length % 2 === 0
     //     ? arr.map((_, i) => arr.slice(i, i + 2))
@@ -108,15 +110,23 @@ export default function Game({data}) {
 
     let [chosenInput, setChosenInput] = useState(0);
 
-      useEffect(() => {
-      // console.log('i fire once')
-      if (queueNumber >= no_of_players) {
-        setQueueNumber(0);
-      } else {
-        setQueueNumber(queueNumber+1)
-      }
 
-    }, [chosenInput]);
+    useEffect(() => {
+       if(chosenInput == 9) {
+            // setChosenInput(9);
+       }
+     }, [chosenInput]); 
+
+
+    //   useEffect(() => {
+    //   // console.log('i fire once')
+    //   if (queueNumber > no_of_players) {
+    //     setQueueNumber(0);
+    //   } else {
+    //     setQueueNumber(queueNumber+1)
+    //   }
+
+    // }, [chosenInput]);
 
     return (
       <div className="max-w-7xl h-screen m-auto">
@@ -127,7 +137,7 @@ export default function Game({data}) {
     
         <GameBrackets songStack={songStack} chosenInput={chosenInput} setChosenInput={setChosenInput} setQueueNumber={setQueueNumber}/>
 
-        <PlayerTurn number={(queue[queueNumber])} songNumber={songStack[chosenInput]} name={dataJSON[`player_${queueNumber}`]} />
+        <PlayerTurn number={queueNumber} chosenInput={chosenInput} songNumber={songStack[chosenInput]} no_of_players={no_of_players} setQueueNumber={setQueueNumber} name={dataJSON[`player_${queueNumber}`]} />
         
 
    

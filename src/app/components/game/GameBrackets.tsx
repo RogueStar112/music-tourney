@@ -135,9 +135,9 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput, se
               <div className="flex flex-col grow justify-around">
               {dummyForFutureBrackets.map((item, index) => (
                     <div  className="border-t-2 border-l-2 border-b-2 my-3" key={`${item[0]}${item[1]}-${index}`}>
-                    <Bracket item={`rbs-${item[0]}`} isFlipped={true} isDisabled={true} halfIndex={`rbs-${item[0]}`} chosenInput={chosenInput}/>
+                    <Bracket item={`rbs-${item[0]}`} isFlipped={true} isDisabled={true} halfIndex={`rbs-${item[0]}`} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
 
-                    <Bracket item={`rbs-${item[1]}`} isFlipped={true} isDisabled={true} halfIndex={`rbs-${item[1]}`} chosenInput={chosenInput}/>
+                    <Bracket item={`rbs-${item[1]}`} isFlipped={true} isDisabled={true} halfIndex={`rbs-${item[1]}`} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
 
                     </div>
                   ))}  
@@ -154,9 +154,9 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput, se
                 
                   <div className="border-t-2 border-b-2 border-l-2 my-3"  key={`${item[0]}${item[1]}-${index}`}>
                   
-                      <Bracket item={item[0]} isFlipped={true} isDisabled={true} halfIndex={secondHalfState[index]}  chosenInput={chosenInput}/>
+                      <Bracket item={item[0]} isFlipped={true} isDisabled={true} halfIndex={secondHalfState[index]}  chosenInput={chosenInput} setChosenInput={setChosenInput}/>
 
-                      <Bracket item={item[1]} isFlipped={true} isDisabled={true} halfIndex={secondHalfState[index]}  chosenInput={chosenInput}/>
+                      <Bracket item={item[1]} isFlipped={true} isDisabled={true} halfIndex={secondHalfState[index]}  chosenInput={chosenInput} setChosenInput={setChosenInput}/>
 
                   </div>
                 ))}
