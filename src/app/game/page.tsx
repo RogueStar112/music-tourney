@@ -122,17 +122,24 @@ export default function Game({data}) {
         console.log("FHR", firstHalfRows);
         console.log("SHR", secondHalfRows);
 
+        const dummyForFutureBrackets = [["", ""], ["", ""]];
+        const dummyForFinalBracket = [["", ""]];
+        
+
+        
+
 
         return (
           
-          <div className="flex justify-around text-sm [&>*>*>input]:text-white">
-            <div id="left-bracket">  
-              
+          <div className="flex justify-between max-w-5xl mx-auto text-sm [&>*>*>input]:text-white">
+            <section id="left-bracket">  
+
+                <h2 className="text-white text-center">Round 1</h2>
   
                 {firstHalfRows.map((item, index) => (
 
                   
-                  <div className="border-t-2 border-r-2 border-b-2 my-3">
+                  <div className="border-t-2 border-r-2 border-b-2 my-3" key={`${item}-${index}`}>
 
 
                   
@@ -150,13 +157,93 @@ export default function Game({data}) {
                   </div>
                   
                 ))}
-            </div>
+            </section>
+
+            <section id="left-bracket-second" className="flex flex-col">
+
+              <h2 className="text-white text-center ">Round 3</h2>
+                  
+                  <div className="flex flex-col grow justify-around">
+                  {dummyForFutureBrackets.map((item, index) => (
+                    <div key={`${item}-${index}`}>
+                        <div className="flex justify-between m-2" key={item[0]}>
+                        {item[0]}
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[0]}`}></input>
+                        </div>
+
+                        <div className="flex justify-between m-2" key={item[1]}>
+                        {item[1]}
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[1]}`}></input>
+                        </div>
 
 
-            <div id="right-bracket">  
+                    </div>
+                  ))}
+                  </div>
+
+
+        
+
+            </section>
+
+
+            <section id="final-bracket" className="flex flex-col content-center">
+
+              <h2 className="text-white text-center">Finals</h2>
+              
+              <div className="flex flex-col grow justify-center">
+              {dummyForFinalBracket.map((item, index) => (
+                    <div key={`${item}-${index}`}>
+                        <div className="flex justify-between m-2" key={item[0]}>
+                        {item[0]}
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[0]}`}></input>
+                        </div>
+
+                        <div className="flex justify-between m-2" key={item[1]}>
+                        {item[1]}
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[1]}`}></input>
+                        </div>
+
+
+                    </div>
+                  ))}
+              </div>
+
+            </section>
+
+
+            <section id="right-bracket-second" className="flex flex-col content-around">
+
+              <h2 className="text-white text-center">Round 4</h2>
+
+              <div className="flex flex-col grow justify-around">
+              {dummyForFutureBrackets.map((item, index) => (
+                    <div key={`${item}-${index}`}>
+                        <div className="flex justify-between m-2" key={item[0]}>
+                        {item[0]}
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[0]}`}></input>
+                        </div>
+
+                        <div className="flex justify-between m-2" key={item[1]}>
+                        {item[1]}
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[1]}`}></input>
+                        </div>
+
+
+                    </div>
+                  ))}  
+              </div>
+
+
+            </section>
+
+
+            <section id="right-bracket">  
+
+              <h2 className="text-white text-center">Round 2</h2>
                 {secondHalfRows.map((item, index) => (
                 
-                  <div className="border-t-2 border-b-2 border-l-2 m-3">
+                  <div className="border-t-2 border-b-2 border-l-2 m-3"  key={`${item}-${index}`}>
 
 
                   
@@ -173,7 +260,7 @@ export default function Game({data}) {
 
                   </div>
                 ))}
-            </div>
+            </section>
           </div>
         )
 
