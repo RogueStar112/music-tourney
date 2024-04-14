@@ -1,7 +1,7 @@
 
 
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { useSearchParams } from 'next/navigation'
 
@@ -75,17 +75,25 @@ export default function Game({data}) {
 
     }
 
+
+
     let queue = generateQueue(no_of_players)
 
-    let [queueNumber, setQueueNumber] = useState(queue[0])
+    let [queueNumber, setQueueNumber] = useState(0)
+
+    
 
     // console.log(dataJSON)
-    console.log("QUEUE", queue)    
+    
 
     
 
 
     let songStack = []
+
+ 
+
+
 
     for (let i=0; i<gameRules["total_songs"]; i++) {
       songStack.push(`${i+1}`);
@@ -98,20 +106,28 @@ export default function Game({data}) {
     // }
 
 
-    let [chosenInput, setChosenInput] = useState(1);
+    let [chosenInput, setChosenInput] = useState(0);
 
+      useEffect(() => {
+      // console.log('i fire once')
+      if (queueNumber >= no_of_players) {
+        setQueueNumber(0);
+      } else {
+        setQueueNumber(queueNumber+1)
+      }
 
+    }, [chosenInput]);
 
     return (
-      <div className="max-w-5xl h-screen m-auto">
+      <div className="max-w-7xl h-screen m-auto">
         {/* <p className="text-white">{JSON.stringify(dataJSON)}</p>
         <p className="text-white">{queue}</p> */}
 
         
     
-        <GameBrackets songStack={songStack} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
+        <GameBrackets songStack={songStack} chosenInput={chosenInput} setChosenInput={setChosenInput} setQueueNumber={setQueueNumber}/>
 
-        <PlayerTurn number={queueNumber}  setQueueNumber={setQueueNumber} songNumber={songStack[chosenInput]} name={dataJSON[`player_${queueNumber}`]} />
+        <PlayerTurn number={(queue[queueNumber])} songNumber={songStack[chosenInput]} name={dataJSON[`player_${queueNumber}`]} />
         
 
    

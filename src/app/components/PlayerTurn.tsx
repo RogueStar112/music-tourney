@@ -1,4 +1,4 @@
-export default function PlayerTurn({number, name, songNumber, setQueueNumber}) {
+export default function PlayerTurn({number, name, songNumber}) {
 
   
 
