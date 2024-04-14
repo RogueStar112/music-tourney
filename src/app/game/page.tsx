@@ -8,6 +8,8 @@ import { useSearchParams } from 'next/navigation'
 
 import Bracket from "../components/game/Bracket";
 
+import PlayerTurn from "../components/PlayerTurn";
+
 export default function Game({data}) {
 
 
@@ -72,10 +74,13 @@ export default function Game({data}) {
 
     let queue = generateQueue(no_of_players)
 
+    let [queueNumber, setQueueNumber] = useState(queue[0])
+
     // console.log(dataJSON)
-    // console.log("QUEUE", queue)    
+    console.log("QUEUE", queue)    
 
     
+
 
     let songStack = []
 
@@ -83,11 +88,11 @@ export default function Game({data}) {
       songStack.push(`${i+1}`);
     } 
 
-    function groupByPairs(arr) {
-      return arr.length % 2 === 0
-        ? arr.map((_, i) => arr.slice(i, i + 2))
-        : arr.map((_, i) => arr.slice(i, i + 2)).concat([[arr[arr.length - 1]]]);
-    }
+    // function groupByPairs(arr) {
+    //   return arr.length % 2 === 0
+    //     ? arr.map((_, i) => arr.slice(i, i + 2))
+    //     : arr.map((_, i) => arr.slice(i, i + 2)).concat([[arr[arr.length - 1]]]);
+    // }
 
 
     function renderSongBrackets() {
@@ -124,9 +129,6 @@ export default function Game({data}) {
 
         const dummyForFutureBrackets = [["", ""], ["", ""]];
         const dummyForFinalBracket = [["", ""]];
-        
-
-        
 
 
         return (
@@ -165,15 +167,15 @@ export default function Game({data}) {
                   
                   <div className="flex flex-col grow justify-around">
                   {dummyForFutureBrackets.map((item, index) => (
-                    <div key={`${item}-${index}`}>
-                        <div className="flex justify-between m-2" key={item[0]}>
+                    <div  className="border-t-2 border-r-2 border-b-2 my-3" key={`3-${index}`}>
+                        <div className="flex justify-between m-2" key={`3-${item[0]}`}>
                         {item[0]}
-                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[0]}`}></input>
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[0]}`} disabled></input>
                         </div>
 
-                        <div className="flex justify-between m-2" key={item[1]}>
+                        <div className="flex justify-between m-2" key={`3-${item[1]}`}>
                         {item[1]}
-                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[1]}`}></input>
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[1]}`} disabled></input>
                         </div>
 
 
@@ -193,15 +195,15 @@ export default function Game({data}) {
               
               <div className="flex flex-col grow justify-center">
               {dummyForFinalBracket.map((item, index) => (
-                    <div key={`${item}-${index}`}>
+                    <div  key={`${item}-${index}`}>
                         <div className="flex justify-between m-2" key={item[0]}>
                         {item[0]}
-                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[0]}`}></input>
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[0]}`} disabled></input>
                         </div>
 
                         <div className="flex justify-between m-2" key={item[1]}>
                         {item[1]}
-                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[1]}`}></input>
+                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[1]}`} disabled></input>
                         </div>
 
 
@@ -218,15 +220,15 @@ export default function Game({data}) {
 
               <div className="flex flex-col grow justify-around">
               {dummyForFutureBrackets.map((item, index) => (
-                    <div key={`${item}-${index}`}>
+                    <div  className="border-t-2 border-l-2 border-b-2 my-3" key={`${item}-${index}`}>
                         <div className="flex justify-between m-2" key={item[0]}>
                         {item[0]}
-                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[0]}`}></input>
+                        <input className="bg-slate-600 border-2 border-slate-200 mr-2"  id={`song-${item[0]}`} disabled></input>
                         </div>
 
                         <div className="flex justify-between m-2" key={item[1]}>
                         {item[1]}
-                        <input className="bg-slate-600 border-2 border-slate-200 ml-2"  id={`song-${item[1]}`}></input>
+                        <input className="bg-slate-600 border-2 border-slate-200 mr-2"  id={`song-${item[1]}`} disabled></input>
                         </div>
 
 
@@ -243,18 +245,18 @@ export default function Game({data}) {
               <h2 className="text-white text-center">Round 2</h2>
                 {secondHalfRows.map((item, index) => (
                 
-                  <div className="border-t-2 border-b-2 border-l-2 m-3"  key={`${item}-${index}`}>
+                  <div className="border-t-2 border-b-2 border-l-2 my-3"  key={`${item}-${index}`}>
 
 
                   
                     <div className="flex justify-between m-2 flex-row-reverse" key={item[0]}>
                                       {item[0]}
-                      <input className="bg-slate-600 border-2 border-slate-200 mr-2"  id={`song-${item[0]}`}></input>
+                      <input className="bg-slate-600 border-2 border-slate-200 mr-2"  id={`song-${item[0]}`} disabled></input>
                     </div>
 
                     <div className="flex justify-between m-2 flex-row-reverse" key={item[1]}>
                                       {item[1]}
-                      <input className="bg-slate-600 border-2 border-slate-200 mr-2"  id={`song-${item[1]}`}></input>
+                      <input className="bg-slate-600 border-2 border-slate-200 mr-2 disabled"  id={`song-${item[1]}`} disabled></input>
                     </div>
 
 
@@ -266,19 +268,22 @@ export default function Game({data}) {
 
     }
 
-    function takeTurn() {
-
-      
-
-    }
 
 
     return (
-      <>
-        <p className="text-white">{JSON.stringify(dataJSON)}</p>
-        <p className="text-white">{queue}</p>
+      <div className="max-w-5xl h-screen m-auto">
+        {/* <p className="text-white">{JSON.stringify(dataJSON)}</p>
+        <p className="text-white">{queue}</p> */}
+
+        
+
         {renderSongBrackets()}
-      </>
+
+        {<PlayerTurn number={queueNumber} name={dataJSON[`player_${queueNumber}`]} setQueueNumber={setQueueNumber} />}
+        
+
+   
+      </div>
 
   )
 }
