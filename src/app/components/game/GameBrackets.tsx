@@ -39,6 +39,8 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput, se
         console.log("SHR", secondHalfRows);
 
         const dummyForFutureBrackets = [["1", "2"], ["3", "4"]];
+
+        const dummyForSemiHalfBrackets = [["1", "2"]];
         const dummyForFinalBracket = [["1", "2"]];
 
         console.log('FIRST HALF STATE', firstHalfState);
@@ -63,7 +65,7 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput, se
 
         return (
           
-          <div className="flex justify-between max-w-7xl mx-auto text-sm [&>*>*>input]:text-white">
+          <div className="flex justify-between  mx-auto text-sm [&>*>*>input]:text-white">
             <section id="left-bracket">  
 
                 <h2 className="text-white text-center">Round 1</h2>
@@ -108,12 +110,35 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput, se
 
             </section>
 
+            <section id="left-bracket-third" className="flex flex-col">
+
+              <h2 className="text-white text-center ">Round 5</h2>
+                  
+                  <div className="flex flex-col grow justify-center">
+                  {dummyForSemiHalfBrackets.map((item, index) => (
+                    <div  className="border-t-2 border-r-2 border-b-2 py-14" key={`3-${index}`}>
+
+                                      
+                      <Bracket item={`lbt-${item[0]}`} isDisabled={true} halfIndex={`lbt-${item[0]}`} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
+
+                      <Bracket item={`lbt-${item[1]}`} isDisabled={true} halfIndex={`lbt-${item[1]}`} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
+
+
+                    </div>
+                  ))}
+                  </div>
+
+
+        
+
+            </section>
+
 
             <section id="final-bracket" className="flex flex-col content-center">
 
               <h2 className="text-white text-center">Finals</h2>
               
-              <div className="flex flex-col grow justify-center">
+              <div className="flex flex-col grow justify-center [&>div]:m-12">
               {dummyForFinalBracket.map((item, index) => (
                     <div  key={`${item}-${index}`}>
                       <Bracket item={`fb-${item[0]}`} isDisabled={true} halfIndex={`fb-${item[0]}`} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
@@ -127,6 +152,24 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput, se
 
             </section>
 
+          
+            <section id="right-bracket-third" className="flex flex-col content-around">
+
+              <h2 className="text-white text-center">Round 6</h2>
+
+              <div className="flex flex-col grow justify-center">
+              {dummyForSemiHalfBrackets.map((item, index) => (
+                    <div  className="border-t-2 border-l-2 border-b-2 py-14" key={`${item[0]}${item[1]}-${index}`}>
+                    <Bracket item={`rbt-${item[0]}`} isFlipped={true} isDisabled={true} halfIndex={`rbt-${item[0]}`} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
+
+                    <Bracket item={`rbt-${item[1]}`} isFlipped={true} isDisabled={true} halfIndex={`rbt-${item[1]}`} chosenInput={chosenInput} setChosenInput={setChosenInput}/>
+
+                    </div>
+                  ))}  
+              </div>
+
+
+            </section>
 
             <section id="right-bracket-second" className="flex flex-col content-around">
 

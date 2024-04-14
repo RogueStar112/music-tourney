@@ -129,7 +129,7 @@ export default function Game({data}) {
     // }, [chosenInput]);
 
     return (
-      <div className="max-w-7xl h-screen m-auto">
+      <div className="h-screen m-auto">
         {/* <p className="text-white">{JSON.stringify(dataJSON)}</p>
         <p className="text-white">{queue}</p> */}
 
