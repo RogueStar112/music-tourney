@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Bracket from "./Bracket";
 
 export default function GameBrackets({songStack, chosenInput, setChosenInput}) {
@@ -13,6 +14,8 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput}) {
         const firstHalfRows = [];
         const secondHalfRows = [];
 
+        
+
         for  (let i = 0; i < firstHalf.length-1; i+=2) {
 
           firstHalfRows.push([firstHalf[i], firstHalf[i+1]])
@@ -20,7 +23,7 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput}) {
           const element1 = firstHalf[i];
           const element2 = firstHalf[i + 1]; 
 
-          console.log("EL1", element1, "EL2", element2); 
+          // console.log("EL1", element1, "EL2", element2); 
         }
 
         for  (let i = 0; i < secondHalf.length-1; i+=2) {
@@ -29,11 +32,18 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput}) {
 
         }
 
+        let [firstHalfState, setFirstHalfState] = useState(firstHalf);
+        let [secondHalfState, setSecondHalfState] = useState(secondHalf);
+ 
         console.log("FHR", firstHalfRows);
         console.log("SHR", secondHalfRows);
 
-        const dummyForFutureBrackets = [["", ""], ["", ""]];
-        const dummyForFinalBracket = [["", ""]];
+        const dummyForFutureBrackets = [["1", "2"], ["3", "4"]];
+        const dummyForFinalBracket = [["1", "2"]];
+
+        console.log('FIRST HALF STATE', firstHalfState);
+        console.log('SECOND HALF STATE', secondHalfState);
+
 
 
         return (
@@ -46,13 +56,13 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput}) {
                 {firstHalfRows.map((item, index) => (
 
                   
-                  <div className="border-t-2 border-r-2 border-b-2 my-3" key={`${item}-${index}`}>
-
+                  <div className="border-t-2 border-r-2 border-b-2 my-3" key={`${item[0]}${item[1]}-${index}`}>
 
                     
-                    <Bracket item={item[0]} isDisabled={false}/>
+                    
+                    <Bracket item={item[0]} isDisabled={false} halfIndex={firstHalfState[item[0]-1]}/>
 
-                    <Bracket item={item[1]} isDisabled={false}/>
+                    <Bracket item={item[1]} isDisabled={false} halfIndex={firstHalfState[item[1]-1]}/>
 
 
                   </div>
@@ -69,9 +79,9 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput}) {
                     <div  className="border-t-2 border-r-2 border-b-2 my-3" key={`3-${index}`}>
 
                                       
-                      <Bracket item={'lbs-0'} isDisabled={true}/>
+                      <Bracket item={`lbs-${item[0]}`} isDisabled={true} halfIndex={`lbs-${item[0]}`}/>
 
-                      <Bracket item={'lbs-1'} isDisabled={true}/>
+                      <Bracket item={`lbs-${item[1]}`} isDisabled={true} halfIndex={`lbs-${item[1]}`}/>
 
 
                     </div>
@@ -91,9 +101,9 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput}) {
               <div className="flex flex-col grow justify-center">
               {dummyForFinalBracket.map((item, index) => (
                     <div  key={`${item}-${index}`}>
-                      <Bracket item={'fb-0'} isDisabled={true}/>
+                      <Bracket item={`fb-${item[0]}`} isDisabled={true} halfIndex={`fb-${item[0]}`}/>
 
-                      <Bracket item={'fb-1'} isDisabled={true}/>
+                      <Bracket item={`fb-${item[1]}`} isDisabled={true} halfIndex={`fb-${item[1]}`}/>
 
 
                     </div>
@@ -109,10 +119,10 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput}) {
 
               <div className="flex flex-col grow justify-around">
               {dummyForFutureBrackets.map((item, index) => (
-                    <div  className="border-t-2 border-l-2 border-b-2 my-3" key={`${item}-${index}`}>
-                    <Bracket item={'rbs-0'} isDisabled={true}/>
+                    <div  className="border-t-2 border-l-2 border-b-2 my-3" key={`${item[0]}${item[1]}-${index}`}>
+                    <Bracket item={`lbs-${item[0]}`} isDisabled={true} halfIndex={`lbs-${item[0]}`}/>
 
-                    <Bracket item={'rbs-1'} isDisabled={true}/>
+                    <Bracket item={`lbs-${item[1]}`} isDisabled={true} halfIndex={`lbs-${item[1]}`}/>
 
                     </div>
                   ))}  
@@ -127,11 +137,11 @@ export default function GameBrackets({songStack, chosenInput, setChosenInput}) {
               <h2 className="text-white text-center">Round 2</h2>
                 {secondHalfRows.map((item, index) => (
                 
-                  <div className="border-t-2 border-b-2 border-l-2 my-3"  key={`${item}-${index}`}>
+                  <div className="border-t-2 border-b-2 border-l-2 my-3"  key={`${item[0]}${item[1]}-${index}`}>
                   
-                      <Bracket item={item[0]} isDisabled={true}/>
+                      <Bracket item={item[0]} isDisabled={true} halfIndex={secondHalfState[index]}/>
 
-                      <Bracket item={item[1]} isDisabled={true}/>
+                      <Bracket item={item[1]} isDisabled={true} halfIndex={secondHalfState[index]}/>
 
                   </div>
                 ))}

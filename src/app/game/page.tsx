@@ -98,7 +98,7 @@ export default function Game({data}) {
     // }
 
 
-    let [chosenInput, setChosenInput] = useState(0);
+    let [chosenInput, setChosenInput] = useState(1);
 
 
 
