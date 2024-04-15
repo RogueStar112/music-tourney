@@ -15,22 +15,22 @@ export default function Bracket({item, songStack, name, setSongStack, isFlipped,
 
         setChosenInput(chosenInput+1);
 
-        const newSongStack = songStack.map((c, i) => {
+        // const newSongStack = songStack.map((c, i) => {
 
-            if (i == item-1) {
+        //     if (i == item-1) {
 
 
-                return inputValue;
+        //         return inputValue;
  
-            } else {
+        //     } else {
 
-                return c 
+        //         return c 
 
-            }
+        //     }
 
-        })
+        // })
 
-        setSongStack(newSongStack);
+        // setSongStack(newSongStack);
 
         
         // setIsDisabled(!isDisabled);
