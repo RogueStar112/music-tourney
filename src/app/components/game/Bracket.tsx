@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Bracket({item, songStack, name, setSongStack, isFlipped, isDisabled, halfIndex, chosenInput, setChosenInput}) {
+export default function Bracket({item, songStack, gamePhase, setGamePhase, name, setSongStack, isFlipped, isDisabled, halfIndex, chosenInput, setChosenInput}) {
 
     // Bracket V3
 
@@ -8,12 +8,28 @@ export default function Bracket({item, songStack, name, setSongStack, isFlipped,
     
     let [inputValue, setInputValue] = useState('');
 
+
     function onSubmit(e) {
         e.preventDefault();
         
-         
+        console.log('Submitting... Also, gamephase is:', gamePhase, 'and choseninput is:', chosenInput)
 
-        setChosenInput(chosenInput+1);
+        
+        // ELIMINATION PHASE SETUP
+        // if(gamePhase == 0 && chosenInput>15) {
+        //     setGamePhase(1);
+        //     setChosenInput(0);
+        // }
+
+        // INPUT PHASE
+        if(gamePhase == 0 && chosenInput<=15) {
+            
+            setChosenInput(chosenInput+1);
+        }
+
+
+        
+        
 
         // const newSongStack = songStack.map((c, i) => {
 

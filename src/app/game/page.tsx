@@ -110,6 +110,11 @@ export default function Game({data}) {
 
     let [chosenInput, setChosenInput] = useState(0);
 
+    // gamePhase 0: Input Phase
+    // gamePhase 1: Elimination Phase
+    // gamePhase 2: Winner Phase
+    let [gamePhase, setGamePhase] = useState(0);
+
     let [_songStack, setSongStack] = useState([...songStack]);
 
 
@@ -136,6 +141,14 @@ export default function Game({data}) {
 
      }, [_songStack]); 
 
+    useEffect(() => {
+
+          // CHANGE TO ELIMINATION PHASE
+          if(gamePhase == 1) {
+            setQueueNumber(1);
+          }
+    }, [gamePhase]);
+
     return (
       <div className="h-screen m-auto">
         {/* <p className="text-white">{JSON.stringify(dataJSON)}</p>
@@ -143,9 +156,9 @@ export default function Game({data}) {
 
         
     
-        <GameBrackets songStack={_songStack} setSongStack={setSongStack} chosenInput={chosenInput} setChosenInput={setChosenInput} setQueueNumber={setQueueNumber}/>
+        <GameBrackets songStack={_songStack} gamePhase={gamePhase} setGamePhase={setGamePhase} setSongStack={setSongStack} chosenInput={chosenInput} setChosenInput={setChosenInput} setQueueNumber={setQueueNumber} name={dataJSON[`player_${queueNumber}`]}/>
 
-        <PlayerTurn number={queueNumber} chosenInput={chosenInput} songNumber={songStack[chosenInput]} no_of_players={no_of_players} setQueueNumber={setQueueNumber} name={dataJSON[`player_${queueNumber}`]} />
+        <PlayerTurn number={queueNumber} gamePhase={gamePhase} chosenInput={chosenInput} songNumber={songStack[chosenInput]} no_of_players={no_of_players} setQueueNumber={setQueueNumber} name={dataJSON[`player_${queueNumber}`]} />
         
 
    
